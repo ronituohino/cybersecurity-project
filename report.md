@@ -36,9 +36,12 @@ Passwords are hashed using the MD5 algorithm, which is easily reversable.
 FLAW 5: ...  
 Cryptographic failure, sensitive information in git
 
-The development database is in github containing developer credentials. Some of
-these could end up in production for superusers.
+The development database is
+[in github](https://github.com/ronituohino/cybersecurity-project/blob/main/db.sqlite3)
+containing developer credentials. Some of these could end up in production for
+superusers.
 
-The SECRET_KEY used in development is in an early git commit, which might be the
-same used in production.  
+The SECRET_KEY used in development is in an
+[early git commit](https://github.com/ronituohino/cybersecurity-project/commit/000126a1e16229100606a6681958d8f18db486e1),
+which might be the same used in production.  
 ...
