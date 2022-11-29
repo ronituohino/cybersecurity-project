@@ -15,5 +15,29 @@
 		    {% csrf_token %}
             <input type="submit" value="Logout"/>
         </form>
+
+        <ul>
+            {% for message in messages %}
+            <li>
+                <p>From {{message.source.username}}, To {{message.target.username}}</p>
+                <p>{{message.content|safe}}</p>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <form action="add/" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% if is_alice %}
+                To:
+                <select name="to">
+                {% for user in users %}
+                    <option value="{{user.username}}">{{user.username}}</option>
+                {% endfor %}
+                </select><br>
+            {% endif %}
+
+			<textarea name="content" cols="40" rows="5"></textarea><br>
+            <input type="submit" value="Send">
+        </form>
     </body>
 </html>
