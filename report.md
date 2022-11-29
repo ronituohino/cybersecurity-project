@@ -42,6 +42,6 @@ containing developer credentials. Some of these could end up in production for
 superusers.
 
 The SECRET_KEY used in development is in an
-[early git commit](https://github.com/ronituohino/cybersecurity-project/commit/000126a1e16229100606a6681958d8f18db486e1),
+[early git commit](https://github.com/ronituohino/cybersecurity-project/commit/898fba165ad779d2ba5ba9d3445314dea535c4bc),
 which might be the same used in production.  
 ...
