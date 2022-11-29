@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Instacare</title>
+    </head>
+    <body>
+		<h1>Instacare</h1>
+
+        <table>
+		    <tr>
+		    <th style="text-align:left">Username: <td>{{user.username}} 
+		</table>
+
+        <form action='logout/' method="POST">
+		    {% csrf_token %}
+            <input type="submit" value="Logout"/>
+        </form>
+    </body>
+</html>

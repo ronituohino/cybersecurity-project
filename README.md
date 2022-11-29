@@ -3,8 +3,8 @@
 This is a project application for
 [Cyber Security Base 2022](https://cybersecuritybase.mooc.fi/).
 
-This application has security issues built into it, and a report which details
-how to exploit and fix them.
+This application has security issues built into it, and a report which describes
+the vulnerabilities and how fix them.
 
 Built using [Django](https://www.djangoproject.com/).
 
