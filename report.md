@@ -13,8 +13,8 @@ A database query doesn't handle user input properly, allowing anyone to inject
 their own database query.  
 ...
 
-FLAW 2: ...  
-XSS Injection
+FLAW 2:
+[XSS Injection](https://github.com/ronituohino/cybersecurity-project/blob/main/pages/templates/pages/index.html#L23)
 
 A user can send a message which isn't properly handled, and instead interpreted
 as code if it is valid html. An attacker could send a message with a script -tag
@@ -23,7 +23,9 @@ messages, or other sensitive information from alice's computer when she loades
 the page.
 
 This flaw can be fixed by removing the "|safe" part from the variable in the
-html. This way the message contents are interpreted just as text.
+html. This way the message contents are interpreted just as text. It could also
+be fixed by implementing some sort of validation in the `addMessage` function in
+`views.py`.
 
 FLAW 3: ...  
 Broken access control
