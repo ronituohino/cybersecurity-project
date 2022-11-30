@@ -27,7 +27,8 @@ html. This way the message contents are interpreted just as text. It could also
 be fixed by implementing some sort of validation in the `addMessage` function in
 `views.py`.
 
-FLAW 3: [Broken access control](./pages/views.py/#L44)
+FLAW 3:
+[Broken access control](https://github.com/ronituohino/cybersecurity-project/blob/main/pages/views.py#L44)
 
 The messages route uses the userid that is passed onto it through the GET
 request. This makes it possible for other logged in users to go to their
