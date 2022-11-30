@@ -21,13 +21,14 @@
             <li>
                 <p>From {{message.source.username}}, To {{message.target.username}}</p>
                 <p>{{message.content|safe}}</p>
+                <!-- Fix XSS Injection -->
+                <!-- <p>{{message.content}}</p> -->
             </li>
             {% endfor %}
         </ul>
         <a href="/messages/{{user.id}}/">View all messages</a>
 
         <form action="add/" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
             {% if is_alice %}
                 To:
                 <select name="to">

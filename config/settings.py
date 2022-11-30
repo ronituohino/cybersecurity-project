@@ -112,7 +112,9 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 PASSWORD_HASHERS = ["django.contrib.auth.hashers.MD5PasswordHasher"]
-
+# Fix weak password hashing
+# Omit the above PASSWORD_HASHERS line completely,
+# making Django default to a stronger hashing algorithm
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/

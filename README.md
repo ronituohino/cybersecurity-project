@@ -6,6 +6,9 @@ This is a project application for
 This application has security issues built into it, and a report which describes
 the vulnerabilities and how fix them.
 
+The idea behind the app "Instacare", is that users can contact a user named
+"alice" to help with whatever problems they have in terms of healthcare.
+
 Built using [Django](https://www.djangoproject.com/).
 
 ## Installation
@@ -15,11 +18,8 @@ uses for cryptographic signing.
 
 ## Commands
 
-#### Start the server in development/production mode
+#### Start the server in development mode
 
 ```
 python3 manage.py runserver
 ```
-
-To change between development and production, switch the `DEBUG` boolean in
-`cybersecurity/settings.py`
