@@ -27,12 +27,16 @@ html. This way the message contents are interpreted just as text. It could also
 be fixed by implementing some sort of validation in the `addMessage` function in
 `views.py`.
 
-FLAW 3: ...  
-Broken access control
+FLAW 3: [Broken access control](./pages/views.py/#L44)
 
-A route is missing an authentication check, allowing anyone to access admin data
-manually.  
-...
+The messages route uses the userid that is passed onto it through the GET
+request. This makes it possible for other logged in users to go to their
+messages page, and change the id in the url to someone else's and view their
+messages. This could be easily achieved since the id is just an increasing
+number.
+
+To fix this issue, the messages route should get the userid from the request
+object, and not from the url.
 
 FLAW 4:
 [Weak password hashing](https://github.com/ronituohino/cybersecurity-project/blob/main/config/settings.py#L114)

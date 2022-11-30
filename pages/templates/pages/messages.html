@@ -1,0 +1,8 @@
+<div>
+  {% for message in messages %}
+  <div>
+      <p>From {{message.source.username}}, To {{message.target.username}}</p>
+      <p>{{message.content|safe}}</p>
+  </div>
+  {% endfor %}
+</div>
