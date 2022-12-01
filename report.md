@@ -1,20 +1,27 @@
 LINK: https://github.com/ronituohino/cybersecurity-project  
 Make sure you have Python and Django installed.
 
-FLAW 1: CSRF - https://github.com/ronituohino/cybersecurity-project/blob/main/pages/views.py#L11
+FLAW 1: CSRF -
+https://github.com/ronituohino/cybersecurity-project/blob/main/pages/views.py#L11
 
 The `addMessage` route is not properly protected from a CSRF attack: it does not
 need a CSRF token to validate the request. Now, attackers could bait the user
 into executing a malicious script, and that script could send a valid POST
-request for sending a message in the application, impersonating the user. In
-this context, it might not be such a damaging vulnerability, but for example, in
-a banking application, the possibility of a CSRF attack could have tremendous
+request for sending a message in the application, impersonating the user. The
+CSRF token is unique to the user (and the current session), and the attacker
+doesn't know it, making it impossible to send the request via a malicious
+script.
+
+In this context, it might not be such a damaging vulnerability, but for example,
+in a banking application, the possibility of a CSRF attack could have tremendous
 impact.
 
 To fix the vulnerability, you need to do two things:
 
-- Remove the @csrf_exempt decorator from the route - https://github.com/ronituohino/cybersecurity-project/blob/main/pages/views.py#L11
-- Add a {% csrf_token %} in the html form - https://github.com/ronituohino/cybersecurity-project/blob/main/pages/templates/pages/index.html#L33
+- Remove the @csrf_exempt decorator from the route -
+  https://github.com/ronituohino/cybersecurity-project/blob/main/pages/views.py#L11
+- Add a {% csrf_token %} in the html form -
+  https://github.com/ronituohino/cybersecurity-project/blob/main/pages/templates/pages/index.html#L33
 
 This makes Django add a CSRF token to the request, and the backend also requires
 and validates the token on a request. It's pretty difficult to screw this one up
@@ -26,9 +33,10 @@ https://github.com/ronituohino/cybersecurity-project/blob/main/pages/templates/p
 
 A user can send a message which isn't properly handled, and instead interpreted
 as code if it is valid html. An attacker could send a message with a script -tag
-and a nasty JS program with it. This way the attacker could fish out user
-messages, or other sensitive information from alice's computer when she loades
-the page.
+and a nasty JS program with it. When the receiver opens their messages -page,
+the script is executed on their machine. This way the attacker could fish out
+user messages, or other sensitive information from (for example) alice's
+computer when she loades the page.
 
 This flaw can be fixed by removing the "|safe" part from the variable in the
 html. This way the message contents are interpreted just as text. It could also
@@ -43,17 +51,18 @@ FLAW 3: Broken access control -
 https://github.com/ronituohino/cybersecurity-project/blob/main/pages/views.py#L51
 
 The messages route uses the userid that is passed onto it through the GET
-request. This makes it possible for other logged in users to go to their
-messages page, and change the id in the url to someone else's and view their
-messages. This could be easily achieved since the id is just an increasing
+request via the url. This makes it possible for other logged in users to go to
+their messages page, and change the id in the url to someone else's and view
+their messages. This could be easily achieved since the id is just an increasing
 number.
 
 To fix this issue, the messages route should get the userid from the request
 object, and not from the url.
 
-This is a pretty difficult issue, since frameworks can't enforce secure design.
-I guess this explains why this flaw is #1 in the OWASP Top Ten for 2021.
-Developers need to learn not to trust user input, wherever it may be.
+This is a pretty difficult issue generally, since frameworks can't enforce
+secure design. I guess this explains why this flaw (broken access control) is #1
+in the OWASP Top Ten for 2021. Developers need to learn not to trust user input,
+wherever it may be.
 
 FLAW 4: Weak password hashing -
 https://github.com/ronituohino/cybersecurity-project/blob/main/config/settings.py#L114
