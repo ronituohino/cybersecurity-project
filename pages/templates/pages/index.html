@@ -29,6 +29,8 @@
         <a href="/messages/{{user.id}}/">View all messages</a>
 
         <form action="add/" method="POST" enctype="multipart/form-data">
+	<!-- Fix CSRF vuln -->
+	<!-- {% csrf_token %} -->
             {% if is_alice %}
                 To:
                 <select name="to">
