@@ -1,7 +1,7 @@
 LINK: https://github.com/ronituohino/cybersecurity-project  
 Make sure you have Python and Django installed.
 
-FLAW 1: CSRF - ...
+FLAW 1: CSRF - https://github.com/ronituohino/cybersecurity-project/blob/main/pages/views.py#L11
 
 The `addMessage` route is not properly protected from a CSRF attack: it does not
 need a CSRF token to validate the request. Now, attackers could bait the user
@@ -13,8 +13,8 @@ impact.
 
 To fix the vulnerability, you need to do two things:
 
-- Remove the @csrf_exempt decorator from the route - ...
-- Add a {% csrf_token %} in the html form - ...
+- Remove the @csrf_exempt decorator from the route - https://github.com/ronituohino/cybersecurity-project/blob/main/pages/views.py#L11
+- Add a {% csrf_token %} in the html form - https://github.com/ronituohino/cybersecurity-project/blob/main/pages/templates/pages/index.html#L33
 
 This makes Django add a CSRF token to the request, and the backend also requires
 and validates the token on a request. It's pretty difficult to screw this one up
@@ -40,7 +40,7 @@ since the you need to manually tell Django that the input will be "|safe". In
 other frameworks, you should pay more attention to this though.
 
 FLAW 3: Broken access control -
-https://github.com/ronituohino/cybersecurity-project/blob/main/pages/views.py#L44
+https://github.com/ronituohino/cybersecurity-project/blob/main/pages/views.py#L51
 
 The messages route uses the userid that is passed onto it through the GET
 request. This makes it possible for other logged in users to go to their
